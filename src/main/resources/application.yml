@@ -1,0 +1,35 @@
+### DATABASE ###
+#spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+server:
+    port: 9000
+    servlet:
+        context-path: /Stage
+spring:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: "jdbc:mysql://localhost:3306/DbMobulite"
+        username: root
+        password: letMeIn
+### JPA / HIBERNATE ###
+jpa:
+    show-sql: true
+    hibernate:
+        ddl-auto: update
+    properties:
+        hibernate:
+            dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+
+
+
+application:
+    application:
+        jwt:
+            secret-key: 576E5A7234753778214125442A472D4B6150645367556B58703273357638792F
+            expiration: 86400000
+            refresh-token:
+                expiration: 604800000
+
+
+
+
