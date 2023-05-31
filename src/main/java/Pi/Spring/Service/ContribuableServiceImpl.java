@@ -2,6 +2,7 @@ package Pi.Spring.Service;
 
 import Pi.Spring.Entity.Contribuable;
 import Pi.Spring.Entity.SessionControle;
+import Pi.Spring.Entity.User;
 import Pi.Spring.Repositury.ContribuableRepo;
 import Pi.Spring.Repositury.SessionControleRepo;
 import lombok.RequiredArgsConstructor;
@@ -55,10 +56,11 @@ public class ContribuableServiceImpl implements ContribuableService{
 
     @Override
     public void addAndAffectContribuable(Long idContribuable, Long idSessionControle) {
-        List<Contribuable>contribuables= new ArrayList<>();
         SessionControle sessionControle = sessionControleRepo.findById(idSessionControle).orElse(null);
-        Contribuable contribuable= contribuableRepo.findById(idContribuable).orElse(null);
-        contribuables.add(contribuable);
-        sessionControle.setContribuablesSession(contribuables);
+        Contribuable contribuable = contribuableRepo.findById(idContribuable).orElse(null);
+        contribuable.getSessionControles().add(sessionControle);
+        sessionControle.getContribuablesSession().add(contribuable);
+        sessionControleRepo.save(sessionControle);
+        contribuableRepo.save(contribuable);
     }
 }

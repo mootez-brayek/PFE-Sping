@@ -1,6 +1,5 @@
 package Pi.Spring.Service;
 
-import Pi.Spring.Entity.Role;
 import Pi.Spring.Entity.User;
 
 import java.util.List;
@@ -8,7 +7,6 @@ import java.util.List;
 public interface UserService {
 
 
-    public User saveUser(User user);
     public List<User> getUsers();
 
     public void deleteUser(Long idUser);
@@ -17,5 +15,11 @@ public interface UserService {
 
     public User getUser(Long idUser);
 
-    public void changeUserRole(Long idUser, Role newRole);
+    public void changeUserRole(Long idUser, Long idRole);
+
+    public void assignRoleToUser(String username, String libelle);
+
+
+    public String getUserRole(String  userName);
+
 }

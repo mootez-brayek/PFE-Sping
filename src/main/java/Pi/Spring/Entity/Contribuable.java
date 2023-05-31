@@ -1,6 +1,7 @@
 package Pi.Spring.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,13 +16,14 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "Contrib")
 public class Contribuable implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idContribuable;
+    @Column(unique = true)
     private String nom;
-    private String Service;
     @Enumerated(EnumType.STRING)
     private SecteurActivite secteurActivite;
     @Enumerated(EnumType.STRING)
@@ -31,7 +33,7 @@ public class Contribuable implements Serializable {
 
 
 
-
+    @JsonIgnore
     @ManyToMany(mappedBy="contribuablesSession",cascade = CascadeType.ALL)
     private List<SessionControle> sessionControles;
 
@@ -41,4 +43,7 @@ public class Contribuable implements Serializable {
 
     @ManyToMany(cascade=CascadeType.ALL)
     private List<Impot> impotsContribuable;
+
+
+
 }

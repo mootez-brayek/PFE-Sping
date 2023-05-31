@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: Pi.Spring.PiProjectApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.412 s - in Pi.Spring.PiProjectApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.968 s - in Pi.Spring.PiProjectApplicationTests

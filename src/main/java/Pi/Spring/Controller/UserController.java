@@ -1,16 +1,14 @@
 package Pi.Spring.Controller;
 
-import Pi.Spring.Auth.AuthenticationRequest;
 import Pi.Spring.Auth.AuthenticationResponse;
 import Pi.Spring.Auth.AuthenticationService;
 import Pi.Spring.Auth.RegisterRequest;
-import Pi.Spring.Entity.Role;
 import Pi.Spring.Entity.User;
 import Pi.Spring.Service.UserService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/user/")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 @Slf4j
 public class UserController {
     @Autowired
@@ -30,36 +29,12 @@ public class UserController {
     @Autowired
     AuthenticationService authenticationService;
 
-    @PostMapping("/registerControlleur")
-    public ResponseEntity<AuthenticationResponse> registerControlleur(
-            @RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(authenticationService.registerControlleur(request));
-    }
 
-
-    @PostMapping("/registerAdmin")
-    public ResponseEntity<AuthenticationResponse> registerAdmin(
-            @RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(authenticationService.registerAdmin(request));
+    @PostMapping("/add")
+    public ResponseEntity<AuthenticationResponse> addUser(
+            @RequestBody RegisterRequest request,  @RequestParam("libelle") String libelle) {
+        return ResponseEntity.ok(authenticationService.addUser(request,libelle));
     }
-    @PostMapping("/registerSuperAdmin")
-    public ResponseEntity<AuthenticationResponse> registerSuperAdmin(
-            @RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(authenticationService.registerSuperAdmin(request));
-    }
-    @PostMapping("/registerResponsable")
-    public ResponseEntity<AuthenticationResponse> registerResponsable(
-            @RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(authenticationService.registerResponsable(request));
-    }
-
-    @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody AuthenticationRequest request) {
-
-        return ResponseEntity.ok(authenticationService.authenticate(request));
-    }
-
     @PostMapping("/refresh-token")
     public void refreshToken(
             HttpServletRequest request, HttpServletResponse response
@@ -74,10 +49,31 @@ public class UserController {
     }
 
 
-    @PutMapping("/updateRole/{idUser}")
+    @PutMapping("/updateRole/{idUser}/{idRole}")
 
-    public ResponseEntity<?> changeUserRole(@PathVariable Long idUser, @RequestBody Role newRole) {
-        userService.changeUserRole(idUser, newRole);
+    public ResponseEntity<?> changeUserRole(@PathVariable Long idUser, @PathVariable Long idRole) {
+        userService.changeUserRole(idUser, idRole);
         return ResponseEntity.ok().build();
     }
+
+
+    @PutMapping("/assign/{username}/{libelle}")
+
+    public ResponseEntity<?> assignRoleToUser(@PathVariable String username, @PathVariable String libelle) {
+        userService.assignRoleToUser(username,libelle);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("delete/{userId}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long userId) {
+        try {
+            userService.deleteUser(userId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting user");
+        }
+    }
+
+
+
 }

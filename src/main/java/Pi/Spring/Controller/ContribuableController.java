@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/Contribuable/")
 @RequiredArgsConstructor
@@ -50,8 +52,8 @@ public class ContribuableController {
 
     @GetMapping ("/get")
     @ResponseBody
-    public void getAllContribuable(){
-        contribuableService.getAllContribuables();
+    public List<Contribuable> getAllContribuable(){
+       return  contribuableService.getAllContribuables();
     }
 
 

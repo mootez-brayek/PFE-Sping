@@ -2,12 +2,13 @@ package Pi.Spring.Service;
 
 import Pi.Spring.Entity.Contribuable;
 import Pi.Spring.Entity.SessionControle;
+import Pi.Spring.Entity.User;
 
 import java.util.List;
 
 public interface SessionControleService {
 
-    public SessionControle AddSession(SessionControle session);
+    public SessionControle AddSession(SessionControle session, List<String>usernames, List<String>names);
 
     public SessionControle getSession (Long idSession);
 
@@ -18,4 +19,6 @@ public interface SessionControleService {
     public void deleteSessionControle(Long idSessionControle);
 
     public SessionControle updateSessionControle(Long idSessionControle);
+
+    public void asssignControlleur(long idSession,  List<String> usernames);
 }
