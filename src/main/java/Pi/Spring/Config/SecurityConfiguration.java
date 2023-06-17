@@ -27,6 +27,7 @@ public class SecurityConfiguration {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
+                .antMatchers("/admin").hasAuthority("admin")
                 .antMatchers("/api/v1/auth/**")
                 .permitAll()
                 .antMatchers("/user/**","/Role/**","/Contribuable/**")

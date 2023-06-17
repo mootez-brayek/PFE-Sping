@@ -11,4 +11,5 @@ import java.util.Optional;
 @Repository
 public interface ContribuableRepo extends JpaRepository<Contribuable, Long> {
     List<Contribuable> findByNomIn(List<String>names);
+    Contribuable findByNom(String nom);
 }

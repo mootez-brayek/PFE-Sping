@@ -6,6 +6,8 @@ import Pi.Spring.Repositury.UserRepo;
 import Pi.Spring.Service.SessionControleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,27 +26,37 @@ public class SessionControleController {
 
 
     @PostMapping("/save")
-    public SessionControle addSession(@RequestBody SessionControle session, @RequestParam("usernames")List<String>userNames,@RequestParam("contribuableNames")List<String>contribuableNames ) {
-        return sessionControleService.AddSession(session,userNames,contribuableNames);
+    public ResponseEntity<SessionControle> addSession(@RequestBody SessionControle session, @RequestParam("usernames")List<String>userNames,@RequestParam("contribuableNames")List<String>contribuableNames,@RequestParam ("descriptions") List<String>descriptions ) {
+        SessionControle createdSession= sessionControleService.AddSession(session,userNames,contribuableNames,  descriptions);
+        return ResponseEntity.ok(createdSession);
     }
 
-    @PutMapping("/update/{idSessionControle}")
-    @ResponseBody
-    public void updateSessionControle(@PathVariable ("idSessionControle") Long idSessionControle){
-        sessionControleService.updateSessionControle(idSessionControle);
+    @PutMapping ("update/{sessionId}")
+    public ResponseEntity<?> updatSession(@PathVariable Long sessionId,@RequestBody SessionControle updatedSession, @RequestParam("usernames")List<String>userNames,@RequestParam("contribuableNames")List<String>contribuablenames) {
+        try {
+            sessionControleService.updateSessionControle(sessionId,updatedSession,userNames,contribuablenames);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating user");
+        }
     }
 
 
     @DeleteMapping("/delete/{idSessionControle}")
     @ResponseBody
-    public void deleteSessionControle(@PathVariable ("idSessionControle") Long idSessionControle){
-        sessionControleService.deleteSessionControle(idSessionControle);
+    public ResponseEntity<?> deleteSessionControle(@PathVariable  Long idSessionControle){
+        try {
+            sessionControleService.deleteSessionControle(idSessionControle);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting session");
+        }
     }
 
     @GetMapping ("/get/{idSessionControle}")
     @ResponseBody
-    public void getSessionControle(@PathVariable ("idSessionControle") Long idSessionControle){
-        sessionControleService.getSession(idSessionControle);
+    public SessionControle getSessionControle(@PathVariable ("idSessionControle") Long idSessionControle){
+       return sessionControleService.getSession(idSessionControle);
     }
 
 

@@ -11,7 +11,7 @@ public interface UserService {
 
     public void deleteUser(Long idUser);
 
-    public User updateUSer(Long idUser);
+    public User updateUSer(Long idUser,User updatedUser);
 
     public User getUser(Long idUser);
 
@@ -21,5 +21,8 @@ public interface UserService {
 
 
     public String getUserRole(String  userName);
+
+    public long getUserCount();
+
 
 }

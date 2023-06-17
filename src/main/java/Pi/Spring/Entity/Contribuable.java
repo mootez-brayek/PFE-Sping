@@ -34,8 +34,8 @@ public class Contribuable implements Serializable {
 
 
     @JsonIgnore
-    @ManyToMany(mappedBy="contribuablesSession",cascade = CascadeType.ALL)
-    private List<SessionControle> sessionControles;
+    @OneToMany(mappedBy = "contribuable")
+    private List<SessionContribuable> contribuablesSession;
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy="contribuable")
     List<Adresse> adresses;

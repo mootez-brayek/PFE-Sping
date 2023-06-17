@@ -7,6 +7,8 @@ import Pi.Spring.Service.RapportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/Rapport/")
 @CrossOrigin("*")
@@ -45,6 +47,6 @@ public class RapportController {
 
     @GetMapping ("/get")
     @ResponseBody
-    public void getAllRapport(){
-        rapportService.getAllRapport();}
+    public List<Rapport> getAllRapport(){
+       return rapportService.getAllRapport();}
 }

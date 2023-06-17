@@ -39,7 +39,12 @@ public class AuthenticationService {
 
 
     public AuthenticationResponse addUser(RegisterRequest request, String libelle) {
-        Role role = roleRepo.findByLibelle(libelle).orElse(null);
+        Role role = roleRepo.findByLibelle(libelle)
+                .orElseGet(() -> {
+                    Role newRole = new Role();
+                    newRole.setLibelle(libelle);
+                    return roleRepo.save(newRole);
+                });
         Optional<User> existingUser = userRepo.findByUsername(request.getUsername());
         if (existingUser.isPresent()) {
             throw new IllegalArgumentException("Username already exists");
@@ -65,10 +70,11 @@ public class AuthenticationService {
         var refreshToken = jwtService.generateRefreshToken(user);
         return AuthenticationResponse
                 .builder()
-                .aceesToken(jwtToken)
+                .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .build();
     }
+
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
@@ -81,7 +87,7 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse
                 .builder()
-                .aceesToken(jwtToken)
+                .accessToken(jwtToken)
                 .build();
     }
 
@@ -102,7 +108,7 @@ public class AuthenticationService {
             if (jwtService.isTokenValid(refreshToken, userDetails)){
                 var accessToken = jwtService.generateToken(userDetails);
                 var authResponse = AuthenticationResponse.builder()
-                        .aceesToken(accessToken)
+                        .accessToken(accessToken)
                         .refreshToken(refreshToken)
                         .build();
                 new ObjectMapper().writeValue(response.getOutputStream(), authResponse);

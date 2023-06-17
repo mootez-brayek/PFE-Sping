@@ -29,6 +29,10 @@ public class RoleController {
          roleService.affectRoleToUser(username,libelle);
     }
 
+    @GetMapping("/getRoleCount")
+    public long getUserCount(){
+        return roleService.getRoleCount();
+    }
     @GetMapping("/getAll")
     public List<Role> getAllRoles() {
         return roleService.getAllRoles();

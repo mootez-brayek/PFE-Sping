@@ -5,12 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
+@Document(collection = "rapport")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,8 +21,7 @@ import java.util.Date;
 public class Rapport implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idRapport;
+    private String idRapport;
     private Date date;
     private String objet;
     private String Contenu;

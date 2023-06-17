@@ -7,6 +7,7 @@ import Pi.Spring.Entity.Contribuable;
 import Pi.Spring.Service.ContribuableService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,8 +33,13 @@ public class ContribuableController {
 
     @PutMapping("/update/{idContribuable}")
     @ResponseBody
-    public void updateContribuable(@PathVariable ("idContribuable") Long idContribuable){
-        contribuableService.updateContribuable(idContribuable);
+    public  ResponseEntity<?> updateContribuable(@PathVariable ("idContribuable") Long idContribuable,@RequestBody Contribuable updatedContribuable){
+        try {
+            contribuableService.updateContribuable(idContribuable,updatedContribuable);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating Contribuable");
+        }
     }
 
 
@@ -56,10 +62,9 @@ public class ContribuableController {
        return  contribuableService.getAllContribuables();
     }
 
-
-    @PostMapping("/AffectContribuable/{idContribuable}/{idSession}")
-    public void AffectContribuable(@PathVariable ("idContribuable") Long idContribuable,@PathVariable ("idSession") Long idSession) {
-        contribuableService.addAndAffectContribuable(idContribuable, idSession);
+    @GetMapping("/getContribuableNumber")
+    public long getContribuableCount(){
+        return contribuableService.getContribuableCount();
     }
 
 

@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -23,10 +20,10 @@ public class SessionControle implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idSession;
-    private String date_Debut;
-    private LocalDate date_Fin;
-    private String Objet;
-    private LocalDate date_Validation;
+    private Date date_Debut;
+    private Date date_Fin;
+    private String objet;
+    private Date date_Validation;
     @Enumerated(EnumType.STRING)
     private Etat etat;
 
@@ -35,8 +32,8 @@ public class SessionControle implements Serializable {
 
 
 
-    @ManyToMany(cascade=CascadeType.ALL)
-    private List<Contribuable> contribuablesSession;
+    @OneToMany(mappedBy = "session")
+    private List<SessionContribuable> contribuablesSession;
 
 
     @ManyToOne(cascade=CascadeType.ALL)
@@ -50,4 +47,6 @@ public class SessionControle implements Serializable {
     private List<User> controlleurs;
 
 
+    @OneToMany(mappedBy = "session")
+    private List<Programme> programmes;
 }

@@ -39,13 +39,28 @@ public class ContribuableServiceImpl implements ContribuableService{
 
     @Override
     public void deleteContribuable(Long idContribuable) {
-        Contribuable contribuable = contribuableRepo.findById(idContribuable).orElse(null);
-        contribuableRepo.delete(contribuable);
+        contribuableRepo.deleteById(idContribuable);
     }
 
     @Override
-    public Contribuable updateContribuable(Long idContribuable) {
-        Contribuable contribuable = contribuableRepo.findById(idContribuable).orElse(null);
+    public Contribuable updateContribuable(Long idContribuable, Contribuable updatedContribuable) {
+        var contribuable = contribuableRepo.findById(idContribuable).orElseThrow(() -> new IllegalArgumentException("Contribuable not found with ID: " + idContribuable));
+
+        if (updatedContribuable.getFormeJuridique() != null) {
+            contribuable.setFormeJuridique(updatedContribuable.getFormeJuridique());
+        }
+
+        if (updatedContribuable.getNom() != null) {
+            contribuable.setNom(updatedContribuable.getNom());
+        }
+
+        if (updatedContribuable.getSecteurActivite() != null) {
+            contribuable.setSecteurActivite(updatedContribuable.getSecteurActivite());
+        }
+
+        if (updatedContribuable.getSituationJuridique() != null) {
+            contribuable.setSituationJuridique(updatedContribuable.getSituationJuridique());
+        }
         return contribuableRepo.save(contribuable);
     }
 
@@ -55,12 +70,9 @@ public class ContribuableServiceImpl implements ContribuableService{
     }
 
     @Override
-    public void addAndAffectContribuable(Long idContribuable, Long idSessionControle) {
-        SessionControle sessionControle = sessionControleRepo.findById(idSessionControle).orElse(null);
-        Contribuable contribuable = contribuableRepo.findById(idContribuable).orElse(null);
-        contribuable.getSessionControles().add(sessionControle);
-        sessionControle.getContribuablesSession().add(contribuable);
-        sessionControleRepo.save(sessionControle);
-        contribuableRepo.save(contribuable);
+    public long getContribuableCount() {
+        return contribuableRepo.count();
     }
+
+
 }

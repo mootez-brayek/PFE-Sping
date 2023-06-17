@@ -11,4 +11,6 @@ public interface RoleService {
     public void affectRoleToUser(String username, String libelle);
 
     public List<Role> getAllRoles();
+
+    public long getRoleCount();
 }

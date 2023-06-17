@@ -3,7 +3,8 @@ package Pi.Spring.Service;
 
 import Pi.Spring.Entity.Rapport;
 import Pi.Spring.Entity.SessionControle;
-import Pi.Spring.Repositury.RapportRepo;
+import Pi.Spring.MongoRepo.RapportMongoRepo;
+import Pi.Spring.Repositury.RapportJpaRepository;
 import Pi.Spring.Repositury.SessionControleRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,36 +21,39 @@ import java.util.List;
 public class RapportServiceImpl implements RapportService {
 
     @Autowired
-    public RapportRepo rapportRepo;
+    public RapportJpaRepository rapportJpaRepository;
+
+    @Autowired
+    RapportMongoRepo rapportMongoRepo;
 
     @Autowired
     public SessionControleRepo sessionControleRepo;
 
     @Override
     public Rapport AddRapport(Rapport Rapport) {
-        return rapportRepo.save(Rapport);
+        return rapportMongoRepo.save(Rapport);
     }
 
     @Override
     public Rapport getRapport(Long idRapport) {
-        return rapportRepo.findById(idRapport).orElse(null);
+        return rapportMongoRepo.findById(idRapport).orElse(null);
     }
 
     @Override
     public List<Rapport> getAllRapport() {
-        return rapportRepo.findAll();
+        return rapportMongoRepo.findAll();
     }
 
     @Override
     public void deleteRapport(Long idRapport) {
-        Rapport rapport = rapportRepo.findById(idRapport).orElse(null);
-        rapportRepo.delete(rapport);
+        Rapport rapport = rapportMongoRepo.findById(idRapport).orElse(null);
+        rapportMongoRepo.delete(rapport);
     }
 
     @Override
     public Rapport updateRapport(Long idRapport) {
-        Rapport rapport=rapportRepo.findById(idRapport).orElse(null);
-        return rapportRepo.save(rapport);
+        Rapport rapport= rapportMongoRepo.findById(idRapport).orElse(null);
+        return rapportMongoRepo.save(rapport);
     }
 
     @Override

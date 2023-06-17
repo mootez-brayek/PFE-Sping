@@ -8,17 +8,16 @@ import java.util.List;
 
 public interface ContribuableService {
 
-    public Contribuable saveContribuable(Contribuable contribuable);
+   public Contribuable saveContribuable(Contribuable contribuable);
 
     public List<Contribuable> getAllContribuables();
 
     public void deleteContribuable(Long idContribuable);
 
-    public Contribuable updateContribuable(Long idContribuable);
+    public Contribuable updateContribuable(Long idContribuable, Contribuable updatedContribuable);
 
     public Contribuable getContribuable(Long idContribuable);
 
-    public void addAndAffectContribuable(Long idContribuable, Long idSessionControle);
-
+    public long getContribuableCount();
 
 }

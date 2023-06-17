@@ -34,8 +34,17 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User updateUSer(Long idUser) {
-        var user= userRepo.findById(idUser).orElse(null);
+    public User updateUSer(Long idUser,User updatedUser) {
+        var user= userRepo.findById(idUser).orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + idUser));
+        if (updatedUser.getName() != null) {
+            user.setName(updatedUser.getName());
+        }
+        if (updatedUser.getUsername() != null) {
+            user.setUsername(updatedUser.getUsername());
+        }
+        if (updatedUser.getPassword() != null) {
+            user.setPassword(updatedUser.getPassword());
+        }
         return userRepo.save(user);
     }
 
@@ -81,7 +90,10 @@ public class UserServiceImpl implements UserService{
 
     }
 
-
+    @Override
+    public long getUserCount() {
+        return userRepo.count();
+    }
 
 
 }

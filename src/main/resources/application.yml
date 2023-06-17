@@ -1,23 +1,27 @@
-
 server:
-    port: 8083
     servlet:
         context-path: /Stage
+    port: 8083
+
 spring:
     datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: "jdbc:mysql://localhost:3306/pfe?createDatabaseIfNotExist=true"
+        url: jdbc:mysql://localhost:3306/dbpfe?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
         username: root
         password:
-jpa:
-    show-sql: true
-    hibernate:
-        ddl-auto: create-drop
-    properties:
+
+    data:
+        mongodb:
+            host: localhost
+            port: 27017
+            database: Controlleur
+
+    jpa:
+        show-sql: true
         hibernate:
-            dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-
-
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL5Dialect
 
 
 application:
