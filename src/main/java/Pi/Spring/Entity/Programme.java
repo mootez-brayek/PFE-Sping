@@ -1,5 +1,6 @@
 package Pi.Spring.Entity;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,5 +26,13 @@ public class Programme implements Serializable {
 
 
     @ManyToOne
-    private SessionControle session;
+    @JoinColumn(name = "session_contribuable_id")
+    private SessionContribuable sessionContribuable;
+
+    @ManyToOne
+    @JoinColumn(name = "controlleur_id")
+    private User controlleur;
+
+
+
 }

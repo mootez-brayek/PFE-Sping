@@ -8,5 +8,6 @@ import Pi.Spring.Entity.User;
 import java.util.List;
 
 public interface ProgrammeService {
-    public Programme createProgramme(Programme programme, Long idSession, List<String> usernames, List<String>names);
+    public Programme createProgramme(Programme programme, Long idSession, Long idControlleur,Long idSessionContribuable);
+    public List<Programme> getProgrammes();
 }

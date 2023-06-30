@@ -1,5 +1,6 @@
 package Pi.Spring.Controller;
 
+import Pi.Spring.Entity.SessionContribuable;
 import Pi.Spring.Entity.SessionControle;
 import Pi.Spring.Entity.User;
 import Pi.Spring.Repositury.UserRepo;
@@ -41,6 +42,11 @@ public class SessionControleController {
         }
     }
 
+    @GetMapping("/getSessionNumber")
+    public long getSessionCount(){
+        return sessionControleService.getSessionCount();
+    }
+
 
     @DeleteMapping("/delete/{idSessionControle}")
     @ResponseBody
@@ -53,10 +59,33 @@ public class SessionControleController {
         }
     }
 
-    @GetMapping ("/get/{idSessionControle}")
+
+    @PutMapping ("validate/{sessionId}")
     @ResponseBody
-    public SessionControle getSessionControle(@PathVariable ("idSessionControle") Long idSessionControle){
-       return sessionControleService.getSession(idSessionControle);
+    public ResponseEntity<?> valideSession(@PathVariable Long sessionId) {
+        try {
+            sessionControleService.validateSession(sessionId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating user");
+        }
+    }
+    @GetMapping ("/getContribuable/{idSessionControle}")
+    @ResponseBody
+    public List<SessionContribuable> getSessionContribuable(@PathVariable ("idSessionControle") Long idSessionControle){
+       return sessionControleService.getSessionContribuable(idSessionControle);
+    }
+
+    @GetMapping ("/getControlleurs/{idSessionControle}")
+    @ResponseBody
+    public List<User> getSessionControlleurs(@PathVariable ("idSessionControle") Long idSessionControle){
+        return sessionControleService.getSessionControlleurs(idSessionControle);
+    }
+
+    @GetMapping ("/getSession/{idSession}")
+    @ResponseBody
+    public SessionControle getSession(@PathVariable ("idSession") Long idSession){
+        return sessionControleService.getSession(idSession);
     }
 
 
@@ -65,6 +94,7 @@ public class SessionControleController {
     public List<SessionControle> getAllSessionControle(){
         return sessionControleService.getAllSession();
     }
+
 
 
 

@@ -2,6 +2,7 @@ package Pi.Spring.Service;
 
 import Pi.Spring.Entity.*;
 import Pi.Spring.Repositury.ProgrammeRepo;
+import Pi.Spring.Repositury.SessionContribuableRepo;
 import Pi.Spring.Repositury.SessionControleRepo;
 import Pi.Spring.Repositury.UserRepo;
 import lombok.RequiredArgsConstructor;
@@ -26,17 +27,38 @@ public class ProgrammeServiceImpl implements ProgrammeService{
     UserRepo userRepo;
     @Autowired
     SessionControleRepo sessionControleRepo;
+    @Autowired
+    SessionContribuableRepo sessionContribuableRepo;
+
 
     @Override
-    public Programme createProgramme(Programme programme, Long idSession, List<String> usernames, List<String>names) {
+    public Programme createProgramme(Programme programme, Long idSession, Long idControlleur, Long idSessionContribuable) {
+        SessionControle session = sessionControleRepo.findById(idSession).orElse(null);
 
-        var session = sessionControleRepo.findById(idSession).orElse(null);
-        List<User> controlleurs = session.getControlleurs();
-        List<SessionContribuable> sessionContribuables = session.getContribuablesSession();
+        if (session != null) {
+            User selectedControlleur = session.getControlleurs()
+                    .stream()
+                    .filter(controlleur -> controlleur.getIdUser().equals(idControlleur))
+                    .findFirst()
+                    .orElse(null);
 
-        List<Contribuable> contribuables = sessionContribuables.stream()
-                .map(SessionContribuable::getContribuable)
-                .collect(Collectors.toList());
-        return null;
+            SessionContribuable selectedContribuable = session.getContribuablesSession()
+                    .stream()
+                    .filter(sessionContribuable -> sessionContribuable.getId().equals(idSessionContribuable))
+                    .findFirst()
+                    .orElse(null);
+
+            if (selectedControlleur != null && selectedContribuable != null) {
+                programme.setControlleur(selectedControlleur);
+                programme.setSessionContribuable(selectedContribuable);
+            }
+        }
+
+        return programmeRepo.save(programme);
+    }
+
+    @Override
+    public List<Programme> getProgrammes() {
+        return programmeRepo.findAll();
     }
 }

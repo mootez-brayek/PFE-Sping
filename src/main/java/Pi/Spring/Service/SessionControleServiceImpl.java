@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,19 +41,18 @@ public class SessionControleServiceImpl implements SessionControleService{
         List<User> users=new ArrayList<>();
         List<User> controlleurs = userRepo.findByUsernameIn(usernames);
         users.addAll(controlleurs);
+        List<Contribuable> allContribuables=new ArrayList<>();
         List<Contribuable> contribuables = contribuableRepo.findByNomIn(names);
+        allContribuables.addAll(contribuables);
 
-        // Make sure the number of descriptions matches the number of contribuables
         if (descriptions.size() != contribuables.size()) {
             throw new IllegalArgumentException("Number of descriptions doesn't match the number of contribuables");
         }
 
         List<SessionContribuable> sessionContribuables = new ArrayList<>();
 
-        // Create SessionContribuable entities for each Contribuable with the corresponding description
-        for (int i = 0; i < contribuables.size(); i++) {
-            Contribuable contribuable = contribuables.get(i);
-            User user = users.get(i);
+        for (int i = 0; i < allContribuables.size(); i++) {
+            Contribuable contribuable = allContribuables.get(i);
             String description = descriptions.get(i);
 
             SessionContribuable sessionContribuable = new SessionContribuable();
@@ -62,10 +62,8 @@ public class SessionControleServiceImpl implements SessionControleService{
             sessionContribuables.add(sessionContribuable);
             sessionContribuableRepo.save(sessionContribuable);
         }
-        session.setControlleurs(users);
         session.setEtat(Etat.EnAttent);
-
-        // Set the sessionContribuables for the session
+        session.setControlleurs(users);
         session.setContribuablesSession(sessionContribuables);
         return sessionControleRepo.save(session);
     }
@@ -93,9 +91,32 @@ public class SessionControleServiceImpl implements SessionControleService{
         }*/
         return sessionControleRepo.save(updatedSession);
     }
+
     @Override
-    public SessionControle getSession(Long idSession) {
-        return sessionControleRepo.findById(idSession).orElse(null);
+    public long getSessionCount()  {
+        return sessionControleRepo.count() ;
+    }
+
+    @Override
+    public SessionControle validateSession(Long idSession) {
+        var session = sessionControleRepo.findById(idSession).orElse(null);
+        session.setEtat(Etat.Valide);
+        session.setDate_Validation(LocalDateTime.now());
+        return session;
+    }
+
+
+    @Override
+    public List<SessionContribuable> getSessionContribuable(Long idSession) {
+        SessionControle session = sessionControleRepo.findById(idSession).orElse(null);
+        return session.getContribuablesSession();
+
+    }
+
+    @Override
+    public List<User> getSessionControlleurs(Long idSession) {
+        SessionControle session = sessionControleRepo.findById(idSession).orElse(null);
+        return session.getControlleurs();
     }
 
     @Override
@@ -104,21 +125,15 @@ public class SessionControleServiceImpl implements SessionControleService{
     }
 
     @Override
+    public SessionControle getSession(Long idSession) {
+        return sessionControleRepo.findById(idSession).orElse(null);
+    }
+
+    @Override
     public void deleteSessionControle(Long idSessionControle) {
         SessionControle sessionControle = sessionControleRepo.findById(idSessionControle).orElse(null);
         sessionControleRepo.delete(sessionControle);
     }
-
-
-
-    @Override
-    public void asssignControlleur(long idSession,  List<String> usernames) {
-           SessionControle sessionControle = sessionControleRepo.findById(idSession).orElse(null);
-           List<User> users= userRepo.findByUsernameIn(usernames);
-           sessionControle.getControlleurs().addAll(users);
-           sessionControleRepo.save(sessionControle);
-       }
-
 
 
 }

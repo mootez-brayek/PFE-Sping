@@ -24,12 +24,17 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idUser;
+
     private String name;
+
     private String prenom;
+
     @Column(unique = true)
     private String email;
+
     @Column(unique = true)
     private String username;
+
     private String password;
 
 
@@ -79,10 +84,15 @@ public class User implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, mappedBy="admin")
     private List<SessionControle> sessionControles;
 
+
     @JsonIgnore
     @ManyToMany(mappedBy = "controlleurs")
     private List<SessionControle> SessionsToControl;
-
     @ManyToOne
     private Role role;
+
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "controlleur")
+    private List<Programme> programmes;
 }

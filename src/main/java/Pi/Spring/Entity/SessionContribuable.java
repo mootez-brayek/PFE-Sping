@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,6 +19,7 @@ public class SessionContribuable implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "session_id")
@@ -26,6 +28,13 @@ public class SessionContribuable implements Serializable {
     @ManyToOne
     @JoinColumn(name = "contribuable_id")
     private Contribuable contribuable;
+
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "sessionContribuable")
+    private List<Programme> programmes;
+
+
 
     @Column(name = "description")
     private String description;

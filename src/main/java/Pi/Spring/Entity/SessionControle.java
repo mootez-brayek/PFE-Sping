@@ -1,12 +1,14 @@
 package Pi.Spring.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class SessionControle implements Serializable {
     private Date date_Debut;
     private Date date_Fin;
     private String objet;
-    private Date date_Validation;
+    private LocalDateTime date_Validation;
     @Enumerated(EnumType.STRING)
     private Etat etat;
 
@@ -39,14 +41,12 @@ public class SessionControle implements Serializable {
     @ManyToOne(cascade=CascadeType.ALL)
     private User admin;
 
+
+
     @OneToMany(cascade=CascadeType.ALL, mappedBy="rapportSessionControle")
     List<Rapport>rapports;
-
 
     @ManyToMany
     private List<User> controlleurs;
 
-
-    @OneToMany(mappedBy = "session")
-    private List<Programme> programmes;
 }
