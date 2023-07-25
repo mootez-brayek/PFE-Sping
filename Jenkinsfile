@@ -25,7 +25,7 @@ pipeline {
                     )]) {
                         sh 'git config --global user.email "jenkins-se-ci@example.com"'
                         sh 'git config --global user.name "jenkins-se"'
-                        sh "git remote set-url origin https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/mootez-brayek/PFE-Sping.git"
+                        sh "git remote set-url origin https://${usernameVariable}:${passwordVariable}@github.com/mootez-brayek/PFE-Sping.git"
                         sh 'git add .'
                         sh 'git commit -m "[ci: version update]"'
                         sh 'git push origin HEAD:service/reglement'
