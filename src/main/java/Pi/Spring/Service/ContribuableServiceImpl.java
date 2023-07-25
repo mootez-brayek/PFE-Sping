@@ -26,24 +26,29 @@ public class ContribuableServiceImpl implements ContribuableService{
     public SessionControleRepo sessionControleRepo;
 
 
+
     @Override
     public Contribuable saveContribuable(Contribuable contribuable) {
+        log.info("Saving Contribuable: {}", contribuable);
         return contribuableRepo.save(contribuable);
     }
 
     @Override
     public List<Contribuable> getAllContribuables() {
+        log.info("Getting all Contribuables.");
         return contribuableRepo.findAll();
     }
 
-
     @Override
     public void deleteContribuable(Long idContribuable) {
+        log.info("Deleting Contribuable with ID: {}", idContribuable);
         contribuableRepo.deleteById(idContribuable);
     }
 
     @Override
     public Contribuable updateContribuable(Long idContribuable, Contribuable updatedContribuable) {
+        log.info("Updating Contribuable with ID: {}. Updated Contribuable: {}", idContribuable, updatedContribuable);
+
         var contribuable = contribuableRepo.findById(idContribuable).orElseThrow(() -> new IllegalArgumentException("Contribuable not found with ID: " + idContribuable));
 
         if (updatedContribuable.getFormeJuridique() != null) {
@@ -61,17 +66,26 @@ public class ContribuableServiceImpl implements ContribuableService{
         if (updatedContribuable.getSituationJuridique() != null) {
             contribuable.setSituationJuridique(updatedContribuable.getSituationJuridique());
         }
+
         return contribuableRepo.save(contribuable);
     }
 
     @Override
     public Contribuable getContribuable(Long idContribuable) {
+        log.info("Getting Contribuable with ID: {}", idContribuable);
         return contribuableRepo.findById(idContribuable).orElse(null);
     }
 
     @Override
     public long getContribuableCount() {
+        log.info("Getting count of Contribuables.");
         return contribuableRepo.count();
+    }
+
+    @Override
+    public List<Contribuable> searchContribuable(String query) {
+        log.info("Searching Contribuables with query: {}", query);
+        return contribuableRepo.findByNomContainingIgnoreCase(query);
     }
 
 

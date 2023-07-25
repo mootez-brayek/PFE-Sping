@@ -12,4 +12,6 @@ import java.util.Optional;
 public interface ContribuableRepo extends JpaRepository<Contribuable, Long> {
     List<Contribuable> findByNomIn(List<String>names);
     Contribuable findByNom(String nom);
+
+    List<Contribuable> findByNomContainingIgnoreCase(String nomQuery);
 }

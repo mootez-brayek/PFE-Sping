@@ -43,6 +43,9 @@ public class EmailServiceImpl implements EmailService{
             token.setExpirationDate(LocalDateTime.now().plusMinutes(30));
             tokenRepo.save(token);
             sendResetEmail(request.getEmail(), token.getToken());
+            log.info("Forgot password request processed successfully for email: {}", request.getEmail());
+        } else {
+            log.warn("Forgot password request ignored as no user found with email: {}", request.getEmail());
         }
     }
 
@@ -54,21 +57,28 @@ public class EmailServiceImpl implements EmailService{
                 + "http://localhost:4200/reset-Password?token=" + resetToken +"&email="+ email);
 
         javaMailSender.send(message);
+        log.info("Password reset email sent to: {}", email);
     }
 
-    public Boolean resetPassword(ResetPasswordRequest request) {
-
-        Optional<TokenPassword> tokenPasswordOptional= tokenRepo.findByToken(request.getResetToken());
-        if(tokenPasswordOptional.isPresent()){
+    public Boolean resetPassword(ResetPasswordRequest newPassword, String email, String resetToken) {
+        Optional<TokenPassword> tokenPasswordOptional = tokenRepo.findByToken(resetToken);
+        if (tokenPasswordOptional.isPresent()) {
             TokenPassword tokenPassword = tokenPasswordOptional.get();
-            if(tokenPassword.getUser().getEmail().equals(request.getEmail())){
-                if(!tokenPassword.getExpirationDate().isBefore(LocalDateTime.now())){
-                    tokenPassword.getUser().setPassword(passwordEncoder.encode(request.getNewPassword()));
+            if (tokenPassword.getUser().getEmail().equals(email)) {
+                if (!tokenPassword.getExpirationDate().isBefore(LocalDateTime.now())) {
+                    tokenPassword.getUser().setPassword(passwordEncoder.encode(newPassword.getNewPassword()));
                     tokenPassword.setExpirationDate(LocalDateTime.now().minusMinutes(1));
                     tokenRepo.save(tokenPassword);
+                    log.info("Password reset successful for email: {}", email);
                     return true;
+                } else {
+                    log.warn("Password reset token has expired for email: {}", email);
                 }
+            } else {
+                log.warn("Password reset request ignored as email does not match token for email: {}", email);
             }
+        } else {
+            log.warn("Password reset request ignored as invalid token received for email: {}", email);
         }
         return false;
     }

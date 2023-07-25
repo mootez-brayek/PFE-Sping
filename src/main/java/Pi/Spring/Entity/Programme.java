@@ -1,6 +1,7 @@
 package Pi.Spring.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,8 @@ public class Programme implements Serializable {
     private Long idProgramme;
     private Date date_debut;
     private Date date_fin;
+    private int overallProgress;
+
 
 
     @ManyToOne
@@ -34,5 +37,11 @@ public class Programme implements Serializable {
     private User controlleur;
 
 
+    @OneToOne(cascade=CascadeType.ALL,mappedBy = "programme")
+    Rapport rapport;
+
+    @JsonIgnore
+    @OneToMany( cascade = CascadeType.ALL)
+    private List<Task> tasks;
 
 }

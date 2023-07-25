@@ -2,9 +2,11 @@ package Pi.Spring.Controller;
 
 
 import Pi.Spring.Entity.Contribuable;
+import Pi.Spring.Entity.Programme;
 import Pi.Spring.Entity.Rapport;
 import Pi.Spring.Service.RapportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,10 +20,15 @@ public class RapportController {
     public RapportService rapportService;
 
 
-    @PostMapping("/save")
-    public Rapport save(
-            @RequestBody Rapport rapport) {
-        return rapportService.AddRapport(rapport);
+
+    @PostMapping("/generate")
+    public ResponseEntity<String> generateReport(@RequestBody Programme programme) {
+        try {
+            rapportService.generateReportIfNeeded(programme);
+            return ResponseEntity.ok("Report generated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to generate report: " + e.getMessage());
+        }
     }
 
 
@@ -49,4 +56,6 @@ public class RapportController {
     @ResponseBody
     public List<Rapport> getAllRapport(){
        return rapportService.getAllRapport();}
+
+
 }

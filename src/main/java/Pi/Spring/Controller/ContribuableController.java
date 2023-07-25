@@ -3,6 +3,7 @@ package Pi.Spring.Controller;
 
 
 import Pi.Spring.Entity.Contribuable;
+import Pi.Spring.Entity.User;
 import Pi.Spring.Service.ContribuableService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,5 +67,13 @@ public class ContribuableController {
         return contribuableService.getContribuableCount();
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<Contribuable>> searchContribuable(@RequestParam("query") String query) {
+        List<Contribuable> contribuables = contribuableService.searchContribuable(query);
+        return new ResponseEntity<>(contribuables, HttpStatus.OK);
+    }
+
 
 }
+
+

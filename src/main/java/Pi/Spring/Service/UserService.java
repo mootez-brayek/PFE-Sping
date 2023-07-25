@@ -3,6 +3,7 @@ package Pi.Spring.Service;
 import Pi.Spring.Entity.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
 
@@ -15,6 +16,8 @@ public interface UserService {
 
     public User getUser(Long idUser);
 
+    public Optional<User> getUserDetails(String username);
+
     public void changeUserRole(Long idUser, Long idRole);
 
     public void assignRoleToUser(String username, String libelle);
@@ -23,6 +26,8 @@ public interface UserService {
     public String getUserRole(String  userName);
 
     public long getUserCount();
+
+    public List<User> searchUsers(String query);
 
 
 }

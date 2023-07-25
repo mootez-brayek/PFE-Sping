@@ -2,10 +2,10 @@ package Pi.Spring.Controller;
 
 
 import Pi.Spring.requests.ForgotPasswordRequest;
-import Pi.Spring.requests.ResetPasswordRequest;
-import Pi.Spring.Entity.User;
+
 import Pi.Spring.Service.EmailService;
 import Pi.Spring.requests.MessageRequests;
+import Pi.Spring.requests.ResetPasswordRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+
 
 @RestController
 @RequestMapping("/Reset-Password/")
@@ -33,8 +34,8 @@ public class ResetPasswordController {
     }
 
     @PostMapping("/reset")
-    public ResponseEntity<MessageRequests> resetPassword(@RequestBody ResetPasswordRequest request) {
-        Boolean b = emailService.resetPassword(request);
+    public ResponseEntity<MessageRequests> resetPassword(@RequestBody ResetPasswordRequest newPassword, @RequestParam("email") String email, @RequestParam("token") String resetToken) {
+        Boolean b = emailService.resetPassword(newPassword,email,resetToken);
         if(b){
             return ResponseEntity.ok().body(new MessageRequests("password changed"));
         }else

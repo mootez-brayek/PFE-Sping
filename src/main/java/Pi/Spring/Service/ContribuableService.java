@@ -3,6 +3,7 @@ package Pi.Spring.Service;
 
 
 import Pi.Spring.Entity.Contribuable;
+import Pi.Spring.Entity.User;
 
 import java.util.List;
 
@@ -19,5 +20,7 @@ public interface ContribuableService {
     public Contribuable getContribuable(Long idContribuable);
 
     public long getContribuableCount();
+
+ public List<Contribuable> searchContribuable(String query);
 
 }

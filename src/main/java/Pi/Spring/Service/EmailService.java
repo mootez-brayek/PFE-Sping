@@ -9,5 +9,5 @@ public interface EmailService {
 
     public void sendResetEmail(String email, String resetToken);
 
-    public Boolean resetPassword(ResetPasswordRequest request);
+    public Boolean resetPassword( ResetPasswordRequest newPassword,String email, String resetToken);
 }

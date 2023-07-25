@@ -1,15 +1,17 @@
 package Pi.Spring.Service;
 
 import Pi.Spring.Entity.Contribuable;
+import Pi.Spring.Entity.Programme;
 import Pi.Spring.Entity.Rapport;
 
 import java.util.List;
 
 public interface RapportService {
 
-    public Rapport AddRapport(Rapport Rapport);
+    public void generateReportIfNeeded(Programme programme);
 
     public Rapport getRapport (Long idRapport);
+
 
     public List<Rapport> getAllRapport ();
 
@@ -18,5 +20,4 @@ public interface RapportService {
     public Rapport updateRapport(Long idRapport);
 
 
-    public void addAndAffectRapport(Rapport rapport, Long idSessionControle);
 }

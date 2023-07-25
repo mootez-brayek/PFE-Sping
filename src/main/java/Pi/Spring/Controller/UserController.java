@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/user/")
@@ -34,7 +36,7 @@ public class UserController {
 
     @PostMapping("/add")
     public ResponseEntity<AuthenticationResponse> addUser(
-            @RequestBody RegisterRequest request,  @RequestParam("libelle") String libelle) {
+            @Valid @RequestBody RegisterRequest request, @RequestParam("libelle") String libelle) {
         return ResponseEntity.ok(authenticationService.addUser(request,libelle));
     }
     @PostMapping("/refresh-token")
@@ -59,6 +61,13 @@ public class UserController {
     public long getUserCount(){
         return userService.getUserCount();
     }
+
+
+    @GetMapping("/getUserDetails/{username}")
+    public ResponseEntity<Optional<User>> getUserDetails(@PathVariable String username){
+         return ResponseEntity.ok(userService.getUserDetails(username));
+    }
+
 
 
     @PutMapping("/updateRole/{idUser}/{idRole}")
@@ -96,6 +105,11 @@ public class UserController {
         }
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<User>> searchUsers(@RequestParam("query") String query) {
+        List<User> users = userService.searchUsers(query);
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
 
 
 

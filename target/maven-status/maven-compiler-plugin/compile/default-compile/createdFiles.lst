@@ -22,6 +22,7 @@ Pi\Spring\Service\RapportServiceImpl.class
 Pi\Spring\Auth\RegisterRequest.class
 Pi\Spring\Repositury\ProgrammeRepo.class
 Pi\Spring\Repositury\UserRepo.class
+Pi\Spring\exception\GlobalExceptionHandler.class
 Pi\Spring\Auth\AuthenticationService.class
 Pi\Spring\Service\ImpotService.class
 Pi\Spring\Entity\Impot.class

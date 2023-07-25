@@ -32,13 +32,15 @@ public class SessionControleController {
         return ResponseEntity.ok(createdSession);
     }
 
-    @PutMapping ("update/{sessionId}")
-    public ResponseEntity<?> updatSession(@PathVariable Long sessionId,@RequestBody SessionControle updatedSession, @RequestParam("usernames")List<String>userNames,@RequestParam("contribuableNames")List<String>contribuablenames) {
+    @PutMapping("update/{sessionId}")
+    public ResponseEntity<?> updateSession(@PathVariable Long sessionId, @RequestBody SessionControle updatedSession, @RequestParam("usernames") List<String> usernames, @RequestParam("contribuableNames") List<String> contribuableNames,@RequestParam ("descriptions") List<String>descriptions) {
         try {
-            sessionControleService.updateSessionControle(sessionId,updatedSession,userNames,contribuablenames);
+            sessionControleService.updateSessionControle(sessionId, usernames, contribuableNames, descriptions,updatedSession);
             return ResponseEntity.ok().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Invalid input: " + e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating user");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating session");
         }
     }
 
@@ -70,6 +72,17 @@ public class SessionControleController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating user");
         }
     }
+
+    @PutMapping ("invalidate/{sessionId}")
+    @ResponseBody
+    public ResponseEntity<?> invalideSession(@PathVariable Long sessionId) {
+        try {
+            sessionControleService.invalidateSession(sessionId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating user");
+        }
+    }
     @GetMapping ("/getContribuable/{idSessionControle}")
     @ResponseBody
     public List<SessionContribuable> getSessionContribuable(@PathVariable ("idSessionControle") Long idSessionControle){
@@ -96,6 +109,11 @@ public class SessionControleController {
     }
 
 
+    @GetMapping("/search")
+    public ResponseEntity<List<SessionControle>> searchSessions(@RequestParam("query") String query) {
+        List<SessionControle> sessionControles = sessionControleService.searchSession(query);
+        return new ResponseEntity<>(sessionControles, HttpStatus.OK);
+    }
 
 
 }

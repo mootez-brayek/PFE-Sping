@@ -29,29 +29,37 @@ public class ImpotServiceImpl implements ImpotService{
 
     @Override
     public Impot saveImpot(Impot impot) {
+        log.info("Saving impot: {}", impot);
         return impotRepo.save(impot);
     }
 
     @Override
     public List<Impot> getAllImpots() {
+        log.info("Getting all Impots");
         return impotRepo.findAll();
     }
 
-    @Override
     public void deleteImpot(Long idImpot) {
+        log.info("Deleting Impot with ID: {}", idImpot);
         Impot impot = impotRepo.findById(idImpot).orElse(null);
-        impotRepo.delete(impot);
-
+        if (impot != null) {
+            impotRepo.delete(impot);
+            log.info("Impot with ID {} deleted successfully", idImpot);
+        } else {
+            log.warn("Impot with ID {} not found, no deletion performed", idImpot);
+        }
     }
 
     @Override
     public Impot updateImpot(Long idImpot) {
         Impot impot = impotRepo.findById(idImpot).orElse(null);
+        log.info("");
         return impotRepo.save(impot);
     }
 
     @Override
     public Impot getImpot(Long idImpot) {
+        log.info("getting Impot with ID: {}", idImpot);
         return impotRepo.findById(idImpot).orElse(null);
     }
 

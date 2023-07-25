@@ -18,12 +18,19 @@ public interface SessionControleService {
 
     public void deleteSessionControle(Long idSessionControle);
 
-    public SessionControle updateSessionControle(Long idSessionControle, SessionControle updatedSession, List<String>usernames, List<String>contribuablenames);
+    public SessionControle updateSessionControle(Long idSession, List<String> usernames, List<String> names, List<String> descriptions, SessionControle updatedSession);
 
     public long getSessionCount();
 
     public SessionControle validateSession(Long idSession);
 
-;
+    public SessionControle invalidateSession(Long idSession);
+
+    public List<SessionControle> searchSession(String query);
+
+    public int updateProgress(Long idSession);
+
+
+    ;
 
 }

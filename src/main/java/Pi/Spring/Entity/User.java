@@ -2,13 +2,14 @@ package Pi.Spring.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -30,11 +31,14 @@ public class User implements UserDetails {
     private String prenom;
 
     @Column(unique = true)
+    @NotEmpty(message = "email required")
+    @Email(message = "Email is not valid", regexp = "^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$")
     private String email;
 
     @Column(unique = true)
     private String username;
 
+    @NotEmpty(message="password required")
     private String password;
 
 
