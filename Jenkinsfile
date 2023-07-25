@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(
-                        credentialsId: '30b84a81-08b9-4be5-85bd-be8ad70e7964',
+                        credentialsId: 'cc4c42c7-2e7b-4096-abbe-84221378e26f',
                         usernameVariable: 'mootez-brayek',
                         passwordVariable: 'mootezbrayek98'
                     )]) {
