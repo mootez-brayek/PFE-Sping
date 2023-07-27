@@ -16,6 +16,12 @@ pipeline {
             }
         }
 
+        stage('testing maven'){
+             steps{
+                 sh 'mvn -version'
+             }
+        }
+
 
 
 
