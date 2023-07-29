@@ -64,10 +64,6 @@ public class ProgrammeServiceImpl implements ProgrammeService{
 
             if (selectedControlleur != null && selectedContribuable != null) {
                 programme.setControlleur(selectedControlleur);
-                SimpleMailMessage message = new SimpleMailMessage();
-                message.setTo(selectedControlleur.getEmail());
-                message.setSubject("Nouveau programme de contrôle");
-                message.setText("Vous avez été marqué comme un contrôleur. Veuillez consulter les mises à jour.");
                 programme.setSessionContribuable(selectedContribuable);
 
                 List<Task> tasks = new ArrayList<>();
@@ -79,8 +75,6 @@ public class ProgrammeServiceImpl implements ProgrammeService{
                     tasks.add(task);
                 }
                 programme.setTasks(tasks);
-
-                javaMailSender.send(message);
                 log.info("Email notification sent to the controlleur: {}", selectedControlleur.getEmail());
             } else {
                 log.warn("Controlleur with ID {} or Contribuable with ID {} not found, cannot create Programme", idControlleur, idSessionContribuable);

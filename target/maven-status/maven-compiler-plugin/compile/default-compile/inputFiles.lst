@@ -1,3 +1,4 @@
+C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Repositury\TaskRepo.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Service\ContribuableServiceImpl.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Service\SessionControleServiceImpl.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Entity\User.java
@@ -5,11 +6,13 @@ C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\requests\R
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Entity\SessionContribuable.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Auth\AuthenticationController.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Repositury\UserRepo.java
+C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Entity\Avancement.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Repositury\SessionControleRepo.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Service\RapportServiceImpl.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Entity\TokenPassword.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Repositury\RoleRepo.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Entity\Contribuable.java
+C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Service\TaskService.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Entity\SecteurActivite.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Repositury\TokenRepo.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Controller\RapportController.java
@@ -17,7 +20,6 @@ C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Entity\Imp
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Entity\SessionControle.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\MongoRepo\RapportMongoRepo.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Entity\Programme.java
-C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Entity\Avis.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Entity\SituationJuridique.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Controller\ProgrammeController.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Service\ProgrammeServiceImpl.java
@@ -27,6 +29,7 @@ C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Repositury
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Service\ImpotServiceImpl.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Service\ImpotService.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Repositury\ContribuableRepo.java
+C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Controller\TaskController.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\requests\ForgotPasswordRequest.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\requests\MessageRequests.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Controller\SessionControleController.java
@@ -56,9 +59,11 @@ C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Service\Pr
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Entity\Element.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Service\UserService.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Service\RoleService.java
+C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Entity\Task.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\exception\GlobalExceptionHandler.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Service\RoleServiceImpl.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Controller\RoleController.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Entity\Adresse.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Service\RapportService.java
 C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Entity\FormeJuridique.java
+C:\Users\Moatez\Desktop\Projet Spring\BakSell\src\main\java\Pi\Spring\Service\TaskServiceImpl.java
