@@ -22,7 +22,7 @@ pipeline {
         }
         stage('cleaning java Project'){
             steps{
-                sh 'mvn clean'
+                sh 'mvn clean compile'
                 }
         }
         stage('build artifact'){
