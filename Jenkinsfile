@@ -6,7 +6,6 @@ pipeline {
         jdk 'JAVA_HOME'
     }
     environment {
-         SONAR_TOKEN = credentials('sonar-token')
          dockerRegistry = 'bmootez/spring-pfe'
          dockerCredential = 'dockerhub_id'
          dockerImage = ''
