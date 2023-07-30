@@ -17,7 +17,6 @@ pipeline {
                 echo 'Pulling...'
                 git branch: 'master',
                     url: 'git@github.com:mootez-brayek/PFE-Sping.git'
-                    scmSkip(deleteBuild: true, skipPattern:'.*\\[ci: version update\\].*')
             }
         }
         stage('cleaning java Project'){
