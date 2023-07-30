@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         maven 'M2_HOME'
-        jdk 'JAVA_HOME'
+        jdk 'jdk11'
     }
     environment {
          dockerRegistry = 'bmootez/spring-pfe'
