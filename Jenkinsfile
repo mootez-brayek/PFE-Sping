@@ -36,7 +36,25 @@ pipeline {
                  sh 'mvn -version'
              }
         }
+        stage('Building docker images') {
+             steps {
+                   script {
+                    def dockerImage = docker.build("${dockerRegistry}:${VERSION}")
+                    def latestDockerImage = docker.build("${dockerRegistry}:latest")
+                   }
+             }
+        }
 
+        stage('Deploy docker images') {
+             steps {
+                  script {
+                      docker.withRegistry( dockerRegistry, dockerCredential ) {
+                      dockerImage.push()
+                      latestDockerImage.push()
+                      }
+                  }
+             }
+        }
 
 
 
