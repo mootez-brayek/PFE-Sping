@@ -11,6 +11,7 @@
 	<groupId>Pi.Spring</groupId>
 	<artifactId>PiProject</artifactId>
 	<version>1.0-RELEASE</version>
+	<packaging>war</packaging>
 	<name>PiProject</name>
 	<description>PiProject</description>
 	<properties>
@@ -128,7 +129,6 @@
 	<distributionManagement>
 		<repository>
 			<id>PFE-Spring</id>
-
 			<url>http://172.10.0.140:8081/repository/maven-releases/</url>
 		</repository>
 	</distributionManagement>
