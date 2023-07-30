@@ -39,8 +39,8 @@ pipeline {
         stage('Building docker images') {
              steps {
                    script {
-                       dockerImage = docker.build dockerRegistry + ":$VERSION"
-                       latestDockerImage = docker.build dockerRegistry + ":latest"
+                    def dockerImage = docker.build("${dockerRegistry}:${VERSION}")
+                    def latestDockerImage = docker.build("${dockerRegistry}:latest")
                    }
              }
         }
