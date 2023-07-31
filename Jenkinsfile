@@ -9,7 +9,6 @@ pipeline {
          dockerRegistry = 'bmootez/spring-pfe'
          dockerCredential = 'dockerhub_id'
          dockerImage = ''
-         VERSION = '1.0'
     }
 
     stages {
