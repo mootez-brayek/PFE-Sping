@@ -6,9 +6,10 @@ pipeline {
         jdk 'JAVA_HOME'
     }
     environment {
-         dockerRegistry = 'bmootez/spring-pfe'
+         dockerImage = 'bmootez/spring-pfe'
          dockerCredential = 'dockerhub_id'
-         dockerImage = ''
+         dockerRegistry = 'https://hub.docker.com/repository/docker/bmootez/spring-pfe/general'
+
     }
 
     stages {
