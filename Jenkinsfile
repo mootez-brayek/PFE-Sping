@@ -46,16 +46,16 @@ pipeline {
                    }
              }
         }
-               stage('Deploy docker images') {
-                    steps {
-                        script {
-                            docker.withRegistry( '', credentialsId : 'dockerhub_id' ) {
-                                dockerImage.push()
-                                latestDockerImage.push()
-                           }
-                        }
-                    }
-               }
+             stage('Deploy docker images') {
+                 steps {
+                     script {
+                         withDockerRegistry([credentialsId: 'dockerhub_id', url: '']) {
+                             dockerImage.push()
+                             latestDockerImage.push()
+                         }
+                     }
+                 }
+             }
 
 
 
