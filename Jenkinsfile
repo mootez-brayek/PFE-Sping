@@ -51,18 +51,29 @@ pipeline {
                     sh 'docker login -u bmootez -p mootezbrayek98'
              }
         }
-             stage('Deploy docker images') {
-                 steps {
-                     script {
+        stage('Deploy docker images') {
+             steps {
+                    script {
                          withDockerRegistry([credentialsId: 'dockerhub_id', url: '']) {
                              dockerImage.push()
                              latestDockerImage.push()
                          }
-                     }
-                 }
+                    }
              }
+        }
 
 
+        stage('deploy jar to nexus'){
+              steps{
+                  sh 'mvn deploy:deploy-file -DgroupId=Pi.Spring \
+                        -DartifactId=PiProject \
+                        -Dversion=1.0 \
+                        -Dpackaging=jar \
+                        -Dfile=./target/PiProject-1.0-RELEASE.jar \
+                        -DrepositoryId=deploymentRepo \
+                        -Durl=http://172.10.0.140:8081/repository/maven-releases/'
+              }
+        }
 
     }
 }
