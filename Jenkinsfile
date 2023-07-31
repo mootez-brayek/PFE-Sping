@@ -6,10 +6,9 @@ pipeline {
         jdk 'JAVA_HOME'
     }
     environment {
-         dockerImage = 'bmootez/spring-pfe'
+         dockerRegistry = 'bmootez/spring-pfe'
          dockerCredential = 'dockerhub_id'
-         dockerRegistry = 'https://hub.docker.com/repository/docker/bmootez/spring-pfe/general'
-
+         dockerImage = ''
     }
 
     stages {
@@ -45,17 +44,16 @@ pipeline {
                    }
              }
         }
-
-        stage('Deploy docker images') {
-             steps {
-                  script {
-                      docker.withRegistry( dockerRegistry, dockerCredential ) {
-                      dockerImage.push()
-                      latestDockerImage.push()
-                      }
-                  }
-             }
-        }
+               stage('Deploy docker images') {
+                    steps {
+                        script {
+                            docker.withRegistry( '', dockerCredential ) {
+                                dockerImage.push()
+                                latestDockerImage.push()
+                           }
+                        }
+                    }
+               }
 
 
 
