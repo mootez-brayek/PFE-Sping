@@ -9,6 +9,7 @@ pipeline {
          dockerRegistry = 'bmootez/spring-pfe'
          dockerCredential = 'dockerhub_id'
          dockerImage = ''
+         latestDockerImage=''
     }
 
     stages {
