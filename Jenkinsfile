@@ -46,12 +46,11 @@ pipeline {
                    }
              }
         }
-            stages {
-                stage('Docker Login') {
-                    steps {
-                        sh 'docker login -u bmootez -p mootezbrayek98'
-                    }
-                }
+        stage('Docker Login') {
+             steps {
+                    sh 'docker login -u bmootez -p mootezbrayek98'
+             }
+        }
              stage('Deploy docker images') {
                  steps {
                      script {
