@@ -10,6 +10,8 @@ pipeline {
          dockerCredential = 'dockerhub_id'
          dockerImage = ''
          latestDockerImage=''
+         dockerUsername = 'bmootez'
+         dockerPassword = 'mootezbrayek98'
     }
 
     stages {
@@ -48,7 +50,7 @@ pipeline {
                stage('Deploy docker images') {
                     steps {
                         script {
-                            docker.withRegistry( '', "${dockerCredential}" ) {
+                            docker.withRegistry( '',dockerUsername, dockerPassword ) {
                                 dockerImage.push()
                                 latestDockerImage.push()
                            }
