@@ -49,7 +49,7 @@ pipeline {
                stage('Deploy docker images') {
                     steps {
                         script {
-                            docker.withRegistry( '', credentialsId : dockerCredential ) {
+                            docker.withRegistry( '', credentialsId : 'dockerhub_id' ) {
                                 dockerImage.push()
                                 latestDockerImage.push()
                            }
