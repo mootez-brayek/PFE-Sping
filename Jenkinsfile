@@ -9,6 +9,7 @@ pipeline {
          dockerRegistry = 'bmootez/spring-pfe'
          dockerCredential = 'dockerhub_id'
          dockerImage = ''
+         VERSION = '1.0'
     }
 
     stages {
@@ -39,7 +40,7 @@ pipeline {
         stage('Building docker images') {
              steps {
                    script {
-                    def dockerImage = docker.build("${dockerRegistry}:${VERSION}")
+                    def dockerImage = docker.build("${dockerRegistry}:1.0")
                     def latestDockerImage = docker.build("${dockerRegistry}:latest")
                    }
              }
