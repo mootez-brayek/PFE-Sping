@@ -7,7 +7,7 @@ pipeline {
     }
     environment {
          dockerRegistry = 'bmootez/spring-pfe'
-         dockerCredential = 'dockerhub_id'
+         dockerCredential = 'dockerhub_i'
          dockerImage = ''
          latestDockerImage=''
     }
