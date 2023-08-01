@@ -62,6 +62,12 @@ pipeline {
              }
         }
 
+        stage('MVN SONARQUBE'){
+             steps{
+                    sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=1998'
+             }
+        }
+
 
         stage('deploy jar to nexus'){
               steps{
