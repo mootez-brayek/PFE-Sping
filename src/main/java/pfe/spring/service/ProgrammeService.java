@@ -10,6 +10,8 @@ import java.util.List;
 public interface ProgrammeService {
     public Programme createProgramme(Programme programme, Long idSession, Long idControlleur,Long idSessionContribuable, List<String> taskGoals);
 
+    public void deleteProgramme(Long idProgramme);
+
     public List<Programme> getProgrammes();
 
     List<Programme> getProgrammesBySession(Long sessionId);

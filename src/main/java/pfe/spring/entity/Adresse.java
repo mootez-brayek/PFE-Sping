@@ -9,9 +9,9 @@ public class Adresse implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idAdresse;
-    public String rue;
-    public String pays;
-    public String numero;
+    private String rue;
+    private String pays;
+    private String numero;
 
 
 

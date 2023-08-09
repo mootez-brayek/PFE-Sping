@@ -57,6 +57,7 @@ public class SessionControleServiceImpl implements SessionControleService{
             String description = descriptions.get(i);
             SessionContribuable sessionContribuable = new SessionContribuable();
             sessionContribuable.setSession(session);
+            contribuable.getImpotsContribuable();
             sessionContribuable.setContribuable(contribuable);
             sessionContribuable.setDescription(description);
             sessionContribuables.add(sessionContribuable);

@@ -20,6 +20,11 @@ public class SessionContribuable implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public SessionContribuable(String description, Contribuable contribuable) {
+        this.description = description;
+        this.contribuable = contribuable;
+    }
+
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "session_id")

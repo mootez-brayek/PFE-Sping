@@ -45,7 +45,7 @@ public class SessionControle implements Serializable {
 
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<User> controlleurs;
 
 }

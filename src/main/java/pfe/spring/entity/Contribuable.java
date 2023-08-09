@@ -32,6 +32,10 @@ public class Contribuable implements Serializable {
     private FormeJuridique formeJuridique;
 
 
+    public Contribuable(String nom) {
+        this.nom = nom;
+    }
+
 
     @JsonIgnore
     @OneToMany(mappedBy = "contribuable")

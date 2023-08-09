@@ -2,6 +2,7 @@ package pfe.spring.service;
 
 
 
+import org.springframework.mail.SimpleMailMessage;
 import pfe.spring.entity.*;
 import pfe.spring.mongo_repo.RapportMongoRepo;
 import pfe.spring.repositury.ProgrammeRepo;
@@ -74,7 +75,12 @@ public class ProgrammeServiceImpl implements ProgrammeService{
                     task.setAvancement(Avancement.AFAIRE);
                     tasks.add(task);
                 }
+                SimpleMailMessage message = new SimpleMailMessage();
                 programme.setTasks(tasks);
+                message.setTo(selectedControlleur.getEmail());
+                message.setSubject("controle");
+                message.setText("vous avez marqueé comme un controlleur chez la contribuable : " + selectedContribuable.getContribuable().getNom());
+                javaMailSender.send(message);
                 log.info("Email notification sent to the controlleur: {}", selectedControlleur.getEmail());
             } else {
                 log.warn("Controlleur with ID {} or Contribuable with ID {} not found, cannot create Programme", idControlleur, idSessionContribuable);
@@ -84,6 +90,13 @@ public class ProgrammeServiceImpl implements ProgrammeService{
         }
 
         return programmeRepo.save(programme);
+    }
+
+    @Override
+    public void deleteProgramme(Long idProgramme) {
+        log.info("Deleting programme with ID: {}", idProgramme);
+        Programme programme = programmeRepo.findById(idProgramme).orElse(null);
+        programmeRepo.delete(programme);
     }
 
 
