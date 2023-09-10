@@ -45,11 +45,11 @@ public class SessionControleServiceImpl implements SessionControleService{
         List<Contribuable> contribuables = contribuableRepo.findByNomIn(names);
         allContribuables.addAll(contribuables);
 
+
         if (descriptions.size() != contribuables.size()) {
             log.debug("Number of descriptions doesn't match the number of contribuables.");
             throw new IllegalArgumentException("Number of descriptions doesn't match the number of contribuables");
         }
-
         List<SessionContribuable> sessionContribuables = new ArrayList<>();
 
         for (int i = 0; i < allContribuables.size(); i++) {
@@ -63,6 +63,7 @@ public class SessionControleServiceImpl implements SessionControleService{
             sessionContribuables.add(sessionContribuable);
             sessionContribuableRepo.save(sessionContribuable);
         }
+
         session.setEtat(Etat.ENATTENT);
         session.setControlleurs(users);
         session.setContribuablesSession(sessionContribuables);

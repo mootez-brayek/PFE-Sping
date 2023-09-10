@@ -78,8 +78,8 @@ public class ProgrammeServiceImpl implements ProgrammeService{
                 SimpleMailMessage message = new SimpleMailMessage();
                 programme.setTasks(tasks);
                 message.setTo(selectedControlleur.getEmail());
-                message.setSubject("controle");
-                message.setText("vous avez marqueé comme un controlleur chez la contribuable : " + selectedContribuable.getContribuable().getNom());
+                message.setSubject("nouveau programme du controle");
+                message.setText("vous êtes marqué comme un controlleur chez la contribuable : " + selectedContribuable.getContribuable().getNom());
                 javaMailSender.send(message);
                 log.info("Email notification sent to the controlleur: {}", selectedControlleur.getEmail());
             } else {

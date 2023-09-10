@@ -1,5 +1,6 @@
 package pfe.spring.service;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import pfe.spring.entity.TokenPassword;
 import pfe.spring.repositury.TokenRepo;
 import pfe.spring.requests.ForgotPasswordRequest;
@@ -47,6 +48,7 @@ public class EmailServiceImpl implements EmailService{
             log.info("Forgot password request processed successfully for email: {}", request.getEmail());
         } else {
             log.warn("Forgot password request ignored as no user found with email: {}", request.getEmail());
+            throw new UsernameNotFoundException("No user found with the provided email.");
         }
     }
 

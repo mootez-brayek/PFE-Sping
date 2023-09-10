@@ -68,6 +68,11 @@ pipeline {
              }
         }
 
+        stage('deploy'){
+            steps{
+                sh 'docker-compose up -d'
+            }
+        }
 
         stage('deploy jar to nexus'){
               steps{
