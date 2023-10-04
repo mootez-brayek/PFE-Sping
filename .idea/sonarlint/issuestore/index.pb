@@ -133,3 +133,11 @@ l
 <src/main/java/pfe/spring/config/JwtAuthenticationFilter.java,8\8\88da50c0c4f15e52bf8a2c275ec817189249c572
 h
 8src/main/java/pfe/spring/auth/AuthenticationService.java,3\7\37afc80e7764b40a8d7ff73bbf566fce3cd87e77
+f
+6src/main/java/pfe/spring/service/EmailServiceImpl.java,7\9\7932247b3e364c0cac1065d45014bafecea23a10
+c
+3src/main/java/pfe/spring/entity/FormeJuridique.java,c\b\cb2012879728bec6f79ec340be358132fdf8b1b1
+j
+:src/main/java/pfe/spring/service/ProgrammeServiceImpl.java,4\f\4feb1d3efd17f34c062303dc9017fc0661fba425
+p
+@src/main/java/pfe/spring/service/SessionControleServiceImpl.java,d\8\d854e1fbcd60dcf8280fcfc647cf5be00da28910
