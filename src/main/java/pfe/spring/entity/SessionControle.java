@@ -35,7 +35,7 @@ public class SessionControle implements Serializable {
 
 
 
-    @OneToMany(mappedBy = "session")
+    @OneToMany(mappedBy = "session",cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<SessionContribuable> contribuablesSession;
 
 

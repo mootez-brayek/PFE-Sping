@@ -96,7 +96,7 @@ public class User implements UserDetails {
 
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "controlleurs")
+    @ManyToMany(mappedBy = "controlleurs",cascade = CascadeType.ALL)
     private List<SessionControle> SessionsToControl;
     @ManyToOne
     private Role role;

@@ -38,7 +38,7 @@ public class Contribuable implements Serializable {
 
 
     @JsonIgnore
-    @OneToMany(mappedBy = "contribuable")
+    @OneToMany(mappedBy = "contribuable",cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<SessionContribuable> contribuablesSession;
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy="contribuable")

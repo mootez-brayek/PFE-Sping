@@ -25,18 +25,18 @@ public class SessionContribuable implements Serializable {
         this.contribuable = contribuable;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JsonIgnore
     @JoinColumn(name = "session_id")
     private SessionControle session;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "contribuable_id")
     private Contribuable contribuable;
 
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "sessionContribuable")
+    @OneToMany(cascade = CascadeType.PERSIST,mappedBy = "sessionContribuable")
     private List<Programme> programmes;
 
 
